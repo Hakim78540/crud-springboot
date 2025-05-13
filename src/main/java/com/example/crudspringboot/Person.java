@@ -3,6 +3,7 @@ package com.example.crudspringboot;
 
 import jakarta.persistence.*;
 import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "person")
@@ -14,9 +15,11 @@ public class Person {
 
     private String name;
 
-    private String city;
-
     private String phoneNumber;
+
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id",referencedColumnName = "id")
+    private Address address;
 
     public Long getId() {
         return id;
@@ -34,19 +37,19 @@ public class Person {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

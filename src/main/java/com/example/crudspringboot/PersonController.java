@@ -44,7 +44,6 @@ public class PersonController {
 
         if (person.isPresent()) {
             Person existingPerson = person.get();
-            existingPerson.setCity(personDetails.getCity());
             existingPerson.setPhoneNumber(personDetails.getPhoneNumber());
 
             Person updatedPerson = personRepository.save(existingPerson);
