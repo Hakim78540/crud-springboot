@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des personnes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des personnes</h2>
+
+    <a th:href="@{/persons/new}" class="btn btn-primary mb-3">Ajouter une personne</a>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Téléphone</th>
+            <th>Rue</th>
+            <th>Ville</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${persons}">
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.phoneNumber}"></td>
+
+            <!-- Accès aux champs de l'adresse -->
+            <td th:text="${p.address != null ? p.address.street : ''}"></td>
+            <td th:text="${p.address != null ? p.address.city : ''}"></td>
+
+            <td>
+                <a th:href="@{/persons/edit/{id}(id=${p.id})}" class="btn btn-sm btn-warning">Modifier</a>
+                <a th:href="@{/persons/delete/{id}(id=${p.id})}" class="btn btn-sm btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+

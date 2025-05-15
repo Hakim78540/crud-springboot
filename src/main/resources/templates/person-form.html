@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulaire Personne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="mb-4">Formulaire Personne</h2>
+
+    <form th:action="@{/persons}" th:object="${person}" method="post" class="card p-4 shadow-sm">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Nom"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Téléphone</label>
+            <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="Téléphone"/>
+        </div>
+
+        <hr>
+
+        <h5 class="mb-3">Adresse</h5>
+
+        <div class="mb-3">
+            <label class="form-label">Rue</label>
+            <input type="text" th:field="*{address.street}" class="form-control" placeholder="Rue"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ville</label>
+            <input type="text" th:field="*{address.city}" class="form-control" placeholder="Ville"/>
+        </div>
+
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <a th:href="@{/persons}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+</body>
+</html>
+
