@@ -1,4 +1,4 @@
-package com.example.crudspringboot;
+package com.example.crudspringboot.entity;
 
 import jakarta.persistence.*;
 
@@ -12,6 +12,7 @@ public class Address {
 
     private String street;
     private String city;
+    private String zipCode;
 
     @OneToOne(mappedBy = "address")
     private Person person;
@@ -32,6 +33,14 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
 }

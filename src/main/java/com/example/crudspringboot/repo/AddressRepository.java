@@ -1,5 +1,6 @@
-package com.example.crudspringboot;
+package com.example.crudspringboot.repo;
 
+import com.example.crudspringboot.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,7 @@
-package com.example.crudspringboot;
+package com.example.crudspringboot.entity;
 
 
 import jakarta.persistence.*;
-import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "person")

@@ -1,9 +1,11 @@
-package com.example.crudspringboot;
+package com.example.crudspringboot.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.crudspringboot.entity.Person;
+import com.example.crudspringboot.repo.PersonRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class PersonController {
     public PersonController(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
+
 
     @GetMapping
     public ResponseEntity<List<Person>> getAllPersons() {
@@ -53,6 +56,7 @@ public class PersonController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         Optional<Person> person = personRepository.findById(id);
@@ -63,5 +67,4 @@ public class PersonController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 }
