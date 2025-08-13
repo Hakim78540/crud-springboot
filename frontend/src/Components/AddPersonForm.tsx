@@ -23,22 +23,58 @@ const AddPersonForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} style={{ maxWidth: 420 }}>
-      <h2>Ajouter une personne</h2>
+  <form onSubmit={onSubmit} className="card p-4 mx-auto" style={{ maxWidth: 640 }}>
+    <h2 className="h5 mb-3">Ajouter une personne</h2>
 
-      <label>Nom</label>
-      <input value={form.name} onChange={onChange("name")} placeholder="Ex: Alice" />
+    <div className="form-floating mb-3">
+      <input
+        id="name"
+        className="form-control"
+        value={form.name}
+        onChange={onChange("name")}
+        placeholder="Nom"
+        required
+      />
+      <label htmlFor="name">Nom</label>
+    </div>
 
-      <label>Ville</label>
-      <input value={form.city} onChange={onChange("city")} placeholder="Ex: Paris" />
+    <div className="row g-3">
+      <div className="col-sm-6">
+        <div className="form-floating">
+          <input
+            id="city"
+            className="form-control"
+            value={(form as any).address?.city ?? (form as any).city ?? ""}
+            onChange={e => setForm(f => ({...f, address: {...(f as any).address, city: e.target.value}}))}
+            placeholder="Ville"
+          />
+          <label htmlFor="city">Ville</label>
+        </div>
+      </div>
+      <div className="col-sm-6">
+        <div className="form-floating">
+          <input
+            id="phone"
+            className="form-control"
+            value={form.phoneNumber}
+            onChange={onChange("phoneNumber")}
+            placeholder="Téléphone"
+          />
+          <label htmlFor="phone">Téléphone</label>
+        </div>
+      </div>
+    </div>
 
-      <label>Téléphone</label>
-      <input value={form.phoneNumber} onChange={onChange("phoneNumber")} placeholder="Ex: 0612345678" />
+    {error && <div className="alert alert-danger mt-3">{error}</div>}
 
-      <button type="submit" style={{ marginTop: 12 }}>Enregistrer</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </form>
-  );
+    <div className="d-flex justify-content-end gap-2 mt-3">
+      <button type="button" className="btn btn-outline-secondary" onClick={() => navigate("/persons")}>Annuler</button>
+      <button type="submit" className="btn btn-primary">
+        <i className="bi bi-check2 me-1" /> Enregistrer
+      </button>
+    </div>
+  </form>
+);
 };
 
 export default AddPersonForm;

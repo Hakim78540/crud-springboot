@@ -4,15 +4,20 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginForm from "./Components/LoginForm";
 import PersonList from "./Components/PersonList";
 import AddPersonForm from "./Components/AddPersonForm";
-
-const isAuth = () => !!localStorage.getItem("token");
-
+import { isAuth } from "./Services/auth";
+import TopRightLogout from "./Components/TopRightLogout";
+import "./App.css"; 
+import Layout from "./Components/Layout";
+ 
+// Composant pour protéger les routes privées
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) =>
   isAuth() ? children : <Navigate to="/" replace />;
 
 function App() {
   return (
     <Router>
+      <TopRightLogout /> 
+      <Layout>
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route
@@ -32,6 +37,7 @@ function App() {
           }
         />
       </Routes>
+      </Layout>
     </Router>
   );
 }
